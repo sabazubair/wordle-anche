@@ -1,0 +1,3 @@
+- March 12th: Reviewed wordle plan
+- March 13th: spent 10 mins reviewing whether or not to choose array or set data structure. chose array for fast fetching.
+- March 14th (15m): Created db.js, found 500 5-letter words from TheFreeDictionary, formatted & removed duplicates used Delim.co, tested .includes method using node repl in terminal
