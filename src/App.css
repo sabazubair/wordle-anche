@@ -1,18 +1,13 @@
 #game {
-  font-family: HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue,
-    Helvetica, Arial, Lucida Grande, sans-serif;
-  width: 50%;
+  font-family: Roboto;
   height: 100vh;
+  width: 50%;
   margin: 0 auto;
-}
-
-#board {
-  margin: 50px auto;
+  align-items: center;
+  justify-content: space-between;
 }
 
 #header-container {
-  margin: auto;
-  width: 500px;
   height: 50px;
   display: flex;
   justify-content: space-between;
@@ -31,18 +26,54 @@ header i {
   padding: 4px;
 }
 
-#board .row {
+.board {
+  height: 100vh;
   display: flex;
-  justify-content: center;
+}
+
+#boardrow-container {
+  height: 500px;
+  margin: 50px;
+  /* flex-direction: column; */
+  justify-content: space-between;
   align-items: center;
-  /* border: 1px solid black; */
 }
 
 .game-tile {
   border: 1px solid gray;
   padding: 4px;
   margin: 5px;
-  height: 40px;
-  width: 40px;
+  height: 55px;
+  width: 50px;
   border-radius: 5px;
+}
+
+.keyboard {
+  width: 600px;
+  height: 170px;
+  margin: 0px auto;
+  border-radius: 10px;
+}
+
+.row {
+  margin-top: 2px;
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.key {
+  width: 50px;
+  height: 50px;
+  float: left;
+  cursor: pointer;
+  /* background-color: #fffff4; */
+  background-color: #d3d3d3;
+  color: #000000;
+  border: 3px solid #000000;
+  line-height: 48px;
+  text-align: center;
+  margin: 2px;
+  border-radius: 4px;
 }

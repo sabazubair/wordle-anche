@@ -1,3 +1,6 @@
 - March 12th: Reviewed wordle plan
 - March 13th: spent 10 mins reviewing whether or not to choose array or set data structure. chose array for fast fetching.
 - March 14th (15m): Created db.js, found 500 5-letter words from TheFreeDictionary, formatted & removed duplicates used Delim.co, tested .includes method using node repl in terminal
+- March 15th (15mins): Moved db.js into /src. Currently able to access data. Reached out for support re: app organization.
+- March 16 (30 mins + 45 mins): Created internal grid in BoardContainer, reset BoardRow to being fully presentation component, updated onChange in App.js so that the last letter of the string is being recorded.
+- March 18: (30 mins): Removed npm keyboard. Found CSS for keyboard and customized it to make it my own. Next steps: encapsulate the keyboard into a form. Add onSubmit or onClick to begin validation.
