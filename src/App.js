@@ -27,7 +27,7 @@ export default function App() {
       <div id="game">
         <div id="board">
         <BoardContainer input={input} />
-        <Keyboard onChange={onChange}/>
+        <Keyboard setInput={setInput}/>
       </div>
       </div>
     </div>

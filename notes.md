@@ -3,4 +3,5 @@
 - March 14th (15m): Created db.js, found 500 5-letter words from TheFreeDictionary, formatted & removed duplicates used Delim.co, tested .includes method using node repl in terminal
 - March 15th (15mins): Moved db.js into /src. Currently able to access data. Reached out for support re: app organization.
 - March 16 (30 mins + 45 mins): Created internal grid in BoardContainer, reset BoardRow to being fully presentation component, updated onChange in App.js so that the last letter of the string is being recorded.
-- March 18: (30 mins): Removed npm keyboard. Found CSS for keyboard and customized it to make it my own. Next steps: encapsulate the keyboard into a form. Add onSubmit or onClick to begin validation.
+- March 18: (1 hr+): Removed npm keyboard, created keyboard component, re-styled, researched about whether addEventListener was required or if I could use onClick event by react.
+- March 19: (30 mins) - Got lost in the weeds of addEventListener. Later, realized onClick built-in react method is the way to go. Currently listening for onClick and setting input using e.target.innerText. It's perfect and simple. Created input state in keyboard to keep track of clicked items... delete not working quite yet. May be issue of what is clickable. It seems if you click "S", it sometimes logs "D" which is directly beside it. Click area may need to expand.
