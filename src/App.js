@@ -5,21 +5,20 @@ import { useState, useEffect } from 'react';
 import Keyboard from './Keyboard';
 import db from './db.js';
 
-export default function App() {
-  const [input, setInput] = useState("");
-  const [words, setWords] = useState([]);
-  const [answer, setAnswer] = useState(db[0]);
-
-  useEffect(() => {
-    const random = generateRandomIndex(db);
-    setAnswer(db[random]);
-    console.log(words);
-  }, [words]);
-
   const generateRandomIndex = (dbArr) => {
     let randomIndex = Math.floor(Math.random() * db.length);
     return randomIndex;
   }
+
+export default function App() {
+  const [input, setInput] = useState("");
+  const [words, setWords] = useState([]);
+  const [answer, setAnswer] = useState(() => {
+    const random = generateRandomIndex(db);
+    return db[random];
+  });
+
+  console.log("input", input);
 
   const inputValidator = (submission) => {
     if(input.toLowerCase() === answer) {
