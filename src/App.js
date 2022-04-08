@@ -3,31 +3,39 @@ import BoardContainer from './BoardContainer';
 import Navbar from './Navbar';
 import { useState, useEffect } from 'react';
 import Keyboard from './Keyboard';
-// import Keyboard from 'react-simple-keyboard';
-import 'react-simple-keyboard/build/css/index.css';
-import words from './db.js';
+import db from './db.js';
 
 export default function App() {
   const [input, setInput] = useState("");
+  const [words, setWords] = useState([]);
+  const [answer, setAnswer] = useState(db[0]);
 
-  // const onChange = (str, x) => {
-  //   // const last = str.charAt(str.length - 1);
-  //   // setInput(last);
-  // };
+  useEffect(() => {
+    const random = generateRandomIndex(db);
+    setAnswer(db[random]);
+    console.log(words);
+  }, [words]);
 
-  const onChange = (letter) => {
-    console.log('letter is', letter);
-    setInput(letter);
+  const generateRandomIndex = (dbArr) => {
+    let randomIndex = Math.floor(Math.random() * db.length);
+    return randomIndex;
   }
 
-  // <Keyboard className="keyboard" onChange={onChange} />
+  const inputValidator = (submission) => {
+    if(input.toLowerCase() === answer) {
+      alert("Winner!")
+    } else {
+      alert(`You submitted: ${submission}. Answer is ${answer}.`);
+    }
+  }
+
   return (
     <div>
       <Navbar/>
       <div id="game">
         <div id="board">
         <BoardContainer input={input} />
-        <Keyboard setInput={setInput}/>
+        <Keyboard input={input} setInput={setInput} words={words} setWords={setWords} inputValidator={inputValidator}/>
       </div>
       </div>
     </div>
