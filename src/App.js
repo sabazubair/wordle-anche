@@ -12,20 +12,46 @@ import db from './db.js';
 
 export default function App() {
   const [input, setInput] = useState("");
-  const [words, setWords] = useState([]);
+  const [history, setHistory] = useState([]);
+  const [tries, setTries] = useState(0);
+  const [colors, setColors] = useState([]);
   const [answer, setAnswer] = useState(() => {
     const random = generateRandomIndex(db);
     return db[random];
   });
+  const [subArr, setSubArr] = useState();
 
-  console.log("input", input);
-
-  const inputValidator = (submission) => {
-    if(input.toLowerCase() === answer) {
-      alert("Winner!")
-    } else {
-      alert(`You submitted: ${submission}. Answer is ${answer}.`);
+  const inputValidator = (userInput) => {
+    const ans = answer.split("");
+    const subArr = [];
+    const ansArr = [];
+    for(let i=0; i < userInput.length; i++){
+        let idx = ans.findIndex(x => x === userInput[i].letter.toLowerCase());
+        if(idx != -1) {
+        if(idx === i) {
+          subArr.push({
+            letter: userInput[i].letter,
+            color: "green"
+          })
+        } else {
+          subArr.push({
+            letter: userInput[i].letter,
+            color: "yellow"
+          })
+        }
+        ans[idx]=""
+      }
+      else {
+        subArr.push({
+          letter: userInput[i].letter,
+          color: "grey"
+        })
+      }
     }
+    setInput(subArr);
+    console.log(ans);
+    console.log(subArr);
+    return subArr;
   }
 
   return (
@@ -33,10 +59,10 @@ export default function App() {
       <Navbar/>
       <div id="game">
         <div id="board">
-        <BoardContainer input={input} />
-        <Keyboard input={input} setInput={setInput} words={words} setWords={setWords} inputValidator={inputValidator}/>
+        <BoardContainer input={input} subArr={subArr}/>
+        <Keyboard tries={tries} setTries={setTries} input={input} setInput={setInput} history={history} setHistory={setHistory} inputValidator={inputValidator}/>
       </div>
       </div>
     </div>
   );
-  }
+}

@@ -40,12 +40,24 @@ header i {
 }
 
 .game-tile {
-  border: 1px solid gray;
+  border: 2px solid gray;
   padding: 4px;
   margin: 5px;
   height: 55px;
   width: 50px;
   border-radius: 5px;
+}
+
+.game-tile__submission {
+  border: 3px solid black;
+}
+
+.letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .keyboard {
@@ -70,7 +82,7 @@ header i {
   cursor: pointer;
   display: block;
   /* background-color: #fffff4; */
-  background-color: #d3d3d3;
+  background-color: #D3D6DA;
   color: #000000;
   border: 3px solid #000000;
   line-height: 48px;

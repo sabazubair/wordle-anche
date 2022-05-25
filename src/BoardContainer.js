@@ -8,16 +8,19 @@ function BoardContainer(props) {
   const [grid, setGrid] = useState(() => {
     const data = {}
     for(let i=0; i< rows; i++) {
-      data[i] = []
+      data[i] = [];
       for(let j=0; j< columns; j++){
-        data[i][j] = ''
+        data[i][j] = {
+          letter: "",
+          color: "#FFFFFF"
+        }
       }
     }
-    return data
+    return data;
   });
 
-  const nextRow = useRef(0)
-  const nextColumn = useRef(0)
+  const nextRow = useRef(0);
+  const nextColumn = useRef(0);
 
   const updatedColumn = () => {
     let deletedColumn = null;
@@ -29,14 +32,18 @@ function BoardContainer(props) {
   }
 
   useEffect(() => {
-    if (!props.input) return
+    // console.log(grid);
+  },[grid]);
+
+  useEffect(() => {
+    if (!props.input && nextColumn.current === 0) return
 
     let deletedColumn = updatedColumn();
-    const row = nextRow.current
-    const column = nextColumn.current
-    console.log("ROW:", row, "COL", column, 'input', props.input);
+    const row = nextRow.current;
+    const column = nextColumn.current;
 
     setGrid((state) => {
+      // console.log(state);
       const newState = { ...state, [row]: [ ...state[row] ] }
       newState[row][column] = props.input[column]
       if(deletedColumn != null) {
@@ -46,10 +53,10 @@ function BoardContainer(props) {
     })
 
     nextColumn.current = props.input.length;
-    console.log("NEXTCOLUMN.CURRENT", nextColumn.current, "PROPS.INPUT.LENGTH", props.input.length)
+    // console.log("NEXTCOLUMN.CURRENT", nextColumn.current, "PROPS.INPUT.LENGTH", props.input.length)
     if(column + 1 === columns) {
       nextRow.current += 1
-      console.log("NEXTROW.CURRENT", nextRow.current);
+      // console.log("NEXTROW.CURRENT", nextRow.current);
       nextColumn.current = 0
     }
   }, [props.input.length])
@@ -57,7 +64,7 @@ function BoardContainer(props) {
   return (
       <div id="boardrow-container">
         {[0,1,2,3,4].map((idx, index) => {
-          return <BoardRow input={grid[index]} />
+          return <BoardRow input={grid[index]} subArr={props.subArr}/>
         })
       }
       </div>
