@@ -1,6 +1,11 @@
+#main {
+  display: flex;
+  flex-direction: column;
+  /* overflow-y: hidden; */
+}
+
 #game {
   font-family: Roboto;
-  height: 100vh;
   width: 50%;
   margin: 0 auto;
   align-items: center;
@@ -32,19 +37,25 @@ header i {
 }
 
 #boardrow-container {
-  height: 500px;
-  margin: 50px;
-  /* flex-direction: column; */
+  /* top: 0px; */
+  /* height: 500px; */
+  /* margin: 50px; */
+  bottom: 0px;
+  position: relative;
   justify-content: space-between;
   align-items: center;
 }
 
 .game-tile {
   border: 2px solid gray;
-  padding: 4px;
-  margin: 5px;
-  height: 55px;
-  width: 50px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 4px; */
+  margin: 3px;
+  height: 35px;
+  width: 35px;
   border-radius: 5px;
 }
 
@@ -53,17 +64,29 @@ header i {
 }
 
 .letter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: bold;
+  margin: 0;
+}
+
+.keyboard-wrapper {
+  position: fixed;
+  bottom: 0;
+  margin: 10px 0;
+  left: 0;
+}
+
+#divider {
+  /* position: absolute; */
+  /* left: 0; */
+  width: 100vw;
 }
 
 .keyboard {
   width: 600px;
   height: 170px;
   margin: 0px auto;
+  /* border-top: 3px solid black; */
   border-radius: 10px;
 }
 
