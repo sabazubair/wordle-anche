@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import 'animate.css';
 
-export default function BoardRow(props) {
+export default function BoardRow({input}) {
   useEffect(() => {
     // console.log("boardrow", props.input);
-  }, [props.input]);
+  }, [input]);
 
   return (
     <div className="row">
-      {props.input.map((val) =>
+      {input.map((val) =>
       <div style={{backgroundColor: val.color}} className={`game-tile ` + (val.letter != "" ? `animate__animated animate__pulse game-tile__submission` : "")}>
         <p className="letter">{val.letter}</p>
       </div>)}
