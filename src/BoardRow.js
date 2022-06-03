@@ -3,7 +3,7 @@ import 'animate.css';
 
 export default function BoardRow(props) {
   useEffect(() => {
-
+    // console.log("boardrow", props.input);
   }, [props.input]);
 
   return (
