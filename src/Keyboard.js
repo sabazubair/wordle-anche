@@ -8,13 +8,13 @@ export default function Keyboard(props) {
   function handleOnClick(e) {
     if(props.tries < 5) {
       if(e.target.innerText === 'Delete') {
-      if(props.input.length===0) {
-        return
-      }
-      else {
-        const text = props.input.slice(0, -1);
-        props.setInput(text);
-      }
+        if(props.input.length===0) {
+          return
+        }
+        else {
+          const text = props.input.slice(0, -1);
+          props.setInput(text);
+        }
       }
       else if(e.target.innerText === 'Enter') {
         if(props.input.length === 5){
@@ -23,9 +23,7 @@ export default function Keyboard(props) {
           const appendToHistory = [...props.history];
           appendToHistory.push(props.input);
           props.setHistory(appendToHistory);
-          const addToTries = props.tries + 1;
-          props.setTries(addToTries);
-          props.setInput("");
+          props.setInput([]);
         }
       } else if (props.input.length === 5){ // if input is 5, 2 options: delete, or enter
         return;
