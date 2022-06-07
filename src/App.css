@@ -1,34 +1,36 @@
+body {
+  padding: 0 5px;
+}
+
+
 #main {
   display: flex;
   flex-direction: column;
-  /* overflow-y: hidden; */
+  font-family: 'Kdam Thmor Pro', sans-serif;
 }
 
-#game {
-  font-family: Roboto;
-  width: 50%;
-  margin: 0 auto;
-  align-items: center;
-  justify-content: space-between;
+.columns {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.column {
+  flex: 33.33%;
 }
 
 #header-container {
+  box-sizing: border-box;
   height: 50px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 4px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #D3D3D3;
 }
 
 header .title {
-  display: inline-block;
   font-size: 30px;
-}
-
-header i {
-  font-size: 20px;
-  padding: 4px;
 }
 
 .board {
@@ -52,20 +54,20 @@ header i {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 4px; */
-  margin: 3px;
-  height: 35px;
-  width: 35px;
+  margin: 5px;
+  height: 40px;
+  width: 40px;
   border-radius: 5px;
 }
 
 .game-tile__submission {
-  border: 3px solid black;
+  border: 2px solid black;
 }
 
 .letter {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
+  color: black;
   margin: 0;
 }
 
@@ -79,6 +81,9 @@ header i {
 #divider {
   /* position: absolute; */
   /* left: 0; */
+  background-color: #d3d3d3;
+  border: none;
+  height: 1px;
   width: 100vw;
 }
 
@@ -99,7 +104,8 @@ header i {
 }
 
 .key {
-  width: 50px;
+  box-sizing: border-box;
+  width: 56px;
   height: 50px;
   float: left;
   cursor: pointer;
