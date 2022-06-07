@@ -1,7 +1,8 @@
 import './App.css';
+
 import BoardContainer from './BoardContainer';
 import Navbar from './Navbar';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef} from 'react';
 import Keyboard from './Keyboard';
 import db from './db.js';
 
@@ -24,7 +25,6 @@ const columns = 5;
     }
   };
 
-
 export default function App() {
   const [input, setInput] = useState([]);
   const [history, setHistory] = useState([]);
@@ -33,6 +33,7 @@ export default function App() {
   const [answer, setAnswer] = useState("");
   const [inputRow, setInputRow] = useState(0);
   const [grid, setGrid] = useState(initialGrid);
+  const dividerRef = useRef(null);
 
   useEffect(() => {
     const random = generateRandomIndex(db);
@@ -58,7 +59,7 @@ export default function App() {
         } else {
           subArr.push({
             letter: userInput[i].letter,
-            color: "yellow"
+            color: "#C9B458"
           })
         }
         ans[idx]=""
@@ -87,13 +88,21 @@ export default function App() {
     <div id="main">
       <Navbar/>
       <div id="game">
-        <div id="board">
-        <BoardContainer input={input} inputRow={inputRow} grid={grid} setGrid={setGrid}/>
-        <div className="keyboard-wrapper">
-          <hr id="divider"/>
-        <Keyboard tries={tries} setTries={setTries} input={input} setInput={setInput} history={history} setHistory={setHistory} inputValidator={inputValidator}/>
+        <div className="columns">
+          <div className="board-col-1">
+            <BoardContainer dividerRef={dividerRef} input={input} inputRow={inputRow} grid={grid} setGrid={setGrid}/>
+          </div>
+          <div className="board-col-2">
+            <BoardContainer dividerRef={dividerRef} input={input} inputRow={inputRow} grid={grid} setGrid={setGrid}/>
+          </div>
+          <div className="board-col-3">
+            <BoardContainer dividerRef={dividerRef} input={input} inputRow={inputRow} grid={grid} setGrid={setGrid}/>
+          </div>
+          <div className="keyboard-wrapper">
+            <hr ref={dividerRef} id="divider"/>
+            <Keyboard tries={tries} setTries={setTries} input={input} setInput={setInput} history={history} setHistory={setHistory} inputValidator={inputValidator}/>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
