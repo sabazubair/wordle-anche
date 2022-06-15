@@ -4,48 +4,83 @@ import BoardContainer from './BoardContainer';
 import Navbar from './Navbar';
 import { useState, useEffect, useRef} from 'react';
 import Keyboard from './Keyboard';
-import db from './db.js';
+import db3 from './db-3.js';
+import db5 from './db-5.js';
+import db8 from './db-8.js';
 
-const rows = 5;
-const columns = 5;
-
-  const generateRandomIndex = (dbArr) => {
+  const generateRandomIndex = (db) => {
     let randomIndex = Math.floor(Math.random() * db.length);
     return randomIndex;
   }
 
-  const initialGrid = [];
-  for(let i=0; i< rows; i++) {
-    initialGrid[i] = [];
-    for(let j=0; j< columns; j++){
-      initialGrid[i][j] = {
-        letter: "",
-        color: "#FFFFFF"
+  const initialGrid = (rows, cols) => {
+    const initialGrid = [];
+    for(let i=0; i<rows; i++) {
+      initialGrid[i] = [];
+      for(let j=0; j<cols; j++){
+        initialGrid[i][j] = {
+          letter: "",
+          color: "#FFFFFF"
+        }
       }
     }
-  };
+    return initialGrid;
+  }
+
 
 export default function App() {
   const [input, setInput] = useState([]);
   const [history, setHistory] = useState([]);
   const [tries, setTries] = useState(history.length);
-  const [colors, setColors] = useState([]);
-  const [answer, setAnswer] = useState("");
   const [inputRow, setInputRow] = useState(0);
-  const [grid, setGrid] = useState(initialGrid);
   const dividerRef = useRef(null);
+  const [isActiveBoardId, setIsActiveBoardId] = useState(1);
+  const [boards, setBoards] = useState([
+    {
+      id: 1,
+      rows: 5,
+      cols: 3,
+      grid: initialGrid(5, 3),
+      answer: db3[generateRandomIndex(db3)]
+    },
+    {
+      id: 2,
+      rows: 5,
+      cols: 5,
+      grid: initialGrid(5, 5),
+      answer: db5[generateRandomIndex(db5)]
+    },
+    {
+      id: 3,
+      rows: 5,
+      cols: 8,
+      grid: initialGrid(5, 8),
+      answer:db8[generateRandomIndex(db8)]
+    }
+  ]);
+  const [activeBoard, setActiveBoard] = useState(boards[0]);
 
-  useEffect(() => {
-    const random = generateRandomIndex(db);
-    setAnswer(db[random]);
-  }, []);
+  const setGrid = (newGrid, boardId) => { // takes in grid, sets the active board grid
+      setBoards((oldBoards) => {
+      const newBoards = [...oldBoards];
+      const boardIndex = boards.findIndex((board) => board.id === boardId);
+      newBoards[boardIndex] =  {...newBoards[boardIndex], grid: newGrid};
+      return newBoards;
+    })
+  }
 
   useEffect(() => {
     setTries(history.length);
   }, [history])
 
+  useEffect(() => {
+    setActiveBoard(
+      boards.find((board) => board.id === isActiveBoardId)
+    )
+  }, [isActiveBoardId])
+
   const inputValidator = (userInput) => {
-    const ans = answer.split("");
+    const ans = activeBoard.answer.split("");
     const subArr = [];
     const ansArr = [];
     for(let i=0; i < userInput.length; i++){
@@ -72,11 +107,20 @@ export default function App() {
       }
     }
 
-    setGrid((oldGrid) => {
-      const newGrid = [...oldGrid];
+    // setGrid((oldGrid) => {
+    //   const newGrid = [...oldGrid];
+    //   newGrid[inputRow] = subArr;
+    //   return newGrid;
+    // });
+
+    setBoards((oldBoards) => {
+      const newBoards = [...oldBoards];
+      const boardIndex = boards.findIndex((board) => board.id === isActiveBoardId);
+      const newGrid = [...newBoards[boardIndex].grid];
       newGrid[inputRow] = subArr;
-      return newGrid;
-    });
+      newBoards[boardIndex] =  {...newBoards[boardIndex], grid: newGrid};
+      return newBoards;
+    })
 
     setInputRow((oldInputRow) => {
       return oldInputRow + 1;
@@ -84,19 +128,24 @@ export default function App() {
     setInput([]);
   }
 
+  useEffect(() => {
+    console.log(input);
+  }, [input]);
+
+  console.log(boards[0]);
   return (
     <div id="main">
       <Navbar/>
       <div id="game">
         <div className="columns">
           <div className="board-col-1">
-            <BoardContainer dividerRef={dividerRef} input={input} inputRow={inputRow} grid={grid} setGrid={setGrid}/>
+            <BoardContainer board={boards[0]} isActiveBoard={isActiveBoardId === 1} setGrid={setGrid} dividerRef={dividerRef} input={input} inputRow={inputRow}/>
           </div>
           <div className="board-col-2">
-            <BoardContainer dividerRef={dividerRef} input={input} inputRow={inputRow} grid={grid} setGrid={setGrid}/>
+            <BoardContainer board={boards[1]} isActiveBoard={isActiveBoardId === 2} setGrid={setGrid} dividerRef={dividerRef} input={input} inputRow={inputRow}/>
           </div>
           <div className="board-col-3">
-            <BoardContainer dividerRef={dividerRef} input={input} inputRow={inputRow} grid={grid} setGrid={setGrid}/>
+            <BoardContainer board={boards[2]} isActiveBoard={isActiveBoardId === 3} setGrid={setGrid} dividerRef={dividerRef} input={input} inputRow={inputRow}/>
           </div>
           <div className="keyboard-wrapper">
             <hr ref={dividerRef} id="divider"/>
