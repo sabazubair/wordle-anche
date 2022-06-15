@@ -1,7 +1,7 @@
 import BoardRow from './BoardRow';
 import { useState, useEffect, useRef } from 'react';
 
-function BoardContainer({input, inputRow, grid, setGrid, dividerRef}) {
+function BoardContainer({board, isActiveBoard, setGrid, input, inputRow, dividerRef}) {
   const boardContainer = useRef(null);
 
   const gridFall = (intervalId) => {
@@ -20,7 +20,12 @@ function BoardContainer({input, inputRow, grid, setGrid, dividerRef}) {
     }
   }
 
+  const range = (num) => {
+    return [...Array(num).keys()];
+  }
+
   useEffect(() => {
+    // console.log("board, line 28", board);
     const intervalId = setInterval(() => {
       gridFall(intervalId);
     }, 1000);
@@ -29,24 +34,26 @@ function BoardContainer({input, inputRow, grid, setGrid, dividerRef}) {
 
   useEffect(() => {
       // Grid update
-    setGrid((oldGrid) => {
-      const tempRow = [0,1,2,3,4].map((idx) => {
+    console.log(isActiveBoard);
+    if(isActiveBoard) {
+      const tempRow = range(board.cols).map((idx) => {
         if(input[idx]) {
           return input[idx]
         } else {
           return { letter: "", color: "#FFFFFF"}
         }
       })
-      const newGrid = [...oldGrid];
+      const newGrid = [...board.grid];
       newGrid[inputRow] = tempRow;
-      return newGrid;
-    });
+      // console.log("new grid", newGrid);
+      setGrid(newGrid, board.id);
+    }
   }, [input])
 
   return (
       <div ref={boardContainer} id="boardrow-container">
-        {[0,1,2,3,4].map((idx, index) => {
-          return <BoardRow input={grid[index]}/>
+        {range(board.rows).map((index) => {
+          return <BoardRow input={board.grid[index]}/>
         })
       }
       </div>
