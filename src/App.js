@@ -41,12 +41,14 @@ export default function App() {
       rows: 5,
       cols: 3,
       grid: initialGrid(5, 3),
+      gridFall: 44,
       answer: db3[generateRandomIndex(db3)]
     },
     {
       id: 2,
       rows: 5,
       cols: 5,
+      gridFall: 50,
       grid: initialGrid(5, 5),
       answer: db5[generateRandomIndex(db5)]
     },
@@ -54,6 +56,7 @@ export default function App() {
       id: 3,
       rows: 5,
       cols: 8,
+      gridFall: 55,
       grid: initialGrid(5, 8),
       answer:db8[generateRandomIndex(db8)]
     }
@@ -107,11 +110,6 @@ export default function App() {
       }
     }
 
-    // setGrid((oldGrid) => {
-    //   const newGrid = [...oldGrid];
-    //   newGrid[inputRow] = subArr;
-    //   return newGrid;
-    // });
 
     setBoards((oldBoards) => {
       const newBoards = [...oldBoards];
@@ -122,34 +120,43 @@ export default function App() {
       return newBoards;
     })
 
+    if(subArr.every((el) => el.color === "#6AAA64")) {
+      setIsActiveBoardId(isActiveBoardId + 1);
+      setInputRow(0);
+      setTries(0);
+      return;
+    }
+
     setInputRow((oldInputRow) => {
       return oldInputRow + 1;
     })
+
     setInput([]);
   }
 
   useEffect(() => {
-    console.log(input);
+    // console.log(input);
+    // console.log(boards[1].answer)
   }, [input]);
 
-  console.log(boards[0]);
+  // console.log(boards[0]);
   return (
     <div id="main">
       <Navbar/>
       <div id="game">
         <div className="columns">
-          <div className="board-col-1">
+          <div className="board-col">
             <BoardContainer board={boards[0]} isActiveBoard={isActiveBoardId === 1} setGrid={setGrid} dividerRef={dividerRef} input={input} inputRow={inputRow}/>
           </div>
-          <div className="board-col-2">
+          <div className="board-col">
             <BoardContainer board={boards[1]} isActiveBoard={isActiveBoardId === 2} setGrid={setGrid} dividerRef={dividerRef} input={input} inputRow={inputRow}/>
           </div>
-          <div className="board-col-3">
+          <div className="board-col">
             <BoardContainer board={boards[2]} isActiveBoard={isActiveBoardId === 3} setGrid={setGrid} dividerRef={dividerRef} input={input} inputRow={inputRow}/>
           </div>
           <div className="keyboard-wrapper">
             <hr ref={dividerRef} id="divider"/>
-            <Keyboard tries={tries} setTries={setTries} input={input} setInput={setInput} history={history} setHistory={setHistory} inputValidator={inputValidator}/>
+            <Keyboard wordLength={boards[isActiveBoardId - 1].cols} tries={tries} setTries={setTries} input={input} setInput={setInput} history={history} setHistory={setHistory} inputValidator={inputValidator}/>
           </div>
         </div>
       </div>
