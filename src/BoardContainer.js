@@ -7,7 +7,7 @@ function BoardContainer({board, isActiveBoard, setGrid, input, inputRow, divider
   const gridFall = (intervalId) => {
     const gridBodyPos = boardContainer.current.getBoundingClientRect();
     const currentPos = gridBodyPos.top;
-    boardContainer.current.style.top = (currentPos - 55) + "px"; // moving grid down 5px
+    boardContainer.current.style.top = (currentPos - board.gridFall) + "px"; // moving grid down 5px
     checkCollision(intervalId);
   }
 
@@ -34,7 +34,6 @@ function BoardContainer({board, isActiveBoard, setGrid, input, inputRow, divider
 
   useEffect(() => {
       // Grid update
-    console.log(isActiveBoard);
     if(isActiveBoard) {
       const tempRow = range(board.cols).map((idx) => {
         if(input[idx]) {
@@ -45,7 +44,6 @@ function BoardContainer({board, isActiveBoard, setGrid, input, inputRow, divider
       })
       const newGrid = [...board.grid];
       newGrid[inputRow] = tempRow;
-      // console.log("new grid", newGrid);
       setGrid(newGrid, board.id);
     }
   }, [input])
