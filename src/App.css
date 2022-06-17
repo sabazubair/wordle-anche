@@ -1,7 +1,14 @@
-body {
-  padding: 0 5px;
+html {
+  height: 100vh;
 }
 
+body {
+  padding: 0 5px;
+  height: 100%;
+  background-color: #f9c5d1;
+  background-size: cover;
+  background-image: linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%);
+}
 
 #main {
   display: flex;
@@ -31,6 +38,8 @@ body {
 
 header .title {
   font-size: 30px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  color: #FFF;
 }
 
 .board {
@@ -39,9 +48,6 @@ header .title {
 }
 
 #boardrow-container {
-  /* top: 0px; */
-  /* height: 500px; */
-  /* margin: 50px; */
   bottom: 0px;
   position: relative;
   justify-content: space-between;
@@ -79,8 +85,6 @@ header .title {
 }
 
 #divider {
-  /* position: absolute; */
-  /* left: 0; */
   background-color: #d3d3d3;
   border: none;
   height: 1px;
@@ -91,7 +95,6 @@ header .title {
   width: 600px;
   height: 170px;
   margin: 0px auto;
-  /* border-top: 3px solid black; */
   border-radius: 10px;
 }
 
