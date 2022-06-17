@@ -1,7 +1,7 @@
 import { useState, useEffect} from 'react';
 import 'animate.css';
 
-export default function Keyboard({tries, setTries, input, setInput, history, setHistory, inputValidator}) {
+export default function Keyboard({tries, wordLength, input, setInput, history, setHistory, inputValidator}) {
   const keyboard_vals = ["Q", "W", "E", "R", "T", "Y","U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Enter", "Delete", "Z", "X", "C", "V", "B", "N", "M"];
 
   function handleKeyboard(e) {
@@ -16,50 +16,48 @@ export default function Keyboard({tries, setTries, input, setInput, history, set
         }
       }
       else if(e.target.innerText === 'Enter' || e.keyCode === 13) {
-        if(input.length === 5){
-          // console.log("inside if", props.input);
+        if(input.length === wordLength){
           inputValidator(input);
           const appendToHistory = [...history];
           appendToHistory.push(input);
           setHistory(appendToHistory);
           setInput([]);
         }
-      } else if (input.length === 5){ // if input is 5, 2 options: delete, or enter
-        return;
       }
       else {
-        // let inputArray;
-        // if(e.keyCode) {
-        //   console.log("KEYBOARD", input);
-        //   inputArray = [...input, {letter: "A", color: "#FFFFFF"}]
-        //   console.log(String.fromCharCode(e.keyCode));
-        //   // setInput(inputArray);
-        // } else {
-          // console.log("KEYBOARD ELSE", input);
-          const inputArray = [...input, {letter: e.target.innerText, color: "#FFFFFF"}]
-          // console.log(e.target.innerText)
-          setInput(inputArray);
-        // }
-        // setInput(inputArray);
+        let inputArray;
+        if(e.keyCode) {
+          console.log("Typing...");
+          inputArray = [...input, {letter: String.fromCharCode(e.keyCode), color: "#FFFFFF"}] // Does not append
+          console.log(inputArray);
+        } else (
+          inputArray = [...input, {letter: e.target.innerText, color: "#FFFFFF"}] // Appends
+        )
+        setInput(inputArray);
       }
     } else {
       return
     }
   }
 
-  // useEffect(() => {
-  //   window.addEventListener("keydown", (e) => handleKeyboard(e));
-  //   return () => window.addEventListener("keydown", (e) => handleKeyboard(e));
-  // }, [])
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyboard);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyboard);
+    };
+  }, []);
+
+  const keyboard =  keyboard_vals.map((k) => {
+    return <div className="key" onClick={(e) => handleKeyboard(e)} onKeyDown={(e) => handleKeyboard(e)}>
+      {k}
+    </div>
+  })
 
   return(
   <div className="keyboard">
     <div className="row">
-      {keyboard_vals.map((k) => {
-        return <div className="key" onClick={(e) => handleKeyboard(e)}>
-          {k}
-        </div>
-      })}
+      {keyboard}
     </div>
   </div>
   )
