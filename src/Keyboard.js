@@ -1,12 +1,12 @@
 import { useState, useEffect} from 'react';
-import 'animate.css';
 
-export default function Keyboard({tries, wordLength, input, setInput, history, setHistory, inputValidator}) {
+export default function Keyboard({inputRow, wordLength, input, setInput, inputValidator}) {
   const keyboard_vals = ["Q", "W", "E", "R", "T", "Y","U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Enter", "Delete", "Z", "X", "C", "V", "B", "N", "M"];
 
   function handleKeyboard(e) {
-    if(tries < 5) {
-      if(e.target.innerText === 'Delete' || e.keyCode === 8) {
+    if(inputRow < 5) {
+      if(e.target.innerText === 'Delete' || e.key === 'Delete') {
+        // FIX: Do not print backspace
         if(input.length===0) {
           return
         }
@@ -15,25 +15,23 @@ export default function Keyboard({tries, wordLength, input, setInput, history, s
           setInput(text);
         }
       }
-      else if(e.target.innerText === 'Enter' || e.keyCode === 13) {
+      else if(e.target.innerText === 'Enter' || e.key === 'Enter') {
         if(input.length === wordLength){
           inputValidator(input);
-          const appendToHistory = [...history];
-          appendToHistory.push(input);
-          setHistory(appendToHistory);
           setInput([]);
         }
       }
       else {
-        let inputArray;
-        if(e.keyCode) {
-          console.log("Typing...");
-          inputArray = [...input, {letter: String.fromCharCode(e.keyCode), color: "#FFFFFF"}] // Does not append
-          console.log(inputArray);
-        } else (
-          inputArray = [...input, {letter: e.target.innerText, color: "#FFFFFF"}] // Appends
-        )
-        setInput(inputArray);
+        if(e.key) {
+          const letter = e.key.toUpperCase();
+          setInput((oldInput) => {
+            return [...oldInput, {letter: letter, color: "#FFFFFF"}]
+          });
+        } else {
+          setInput((oldInput) => {
+            return [...oldInput, {letter: e.target.innerText, color: "#FFFFFF"}]
+          });
+        }
       }
     } else {
       return
@@ -46,10 +44,10 @@ export default function Keyboard({tries, wordLength, input, setInput, history, s
     return () => {
       window.removeEventListener('keydown', handleKeyboard);
     };
-  }, []);
+  }, [input]);
 
   const keyboard =  keyboard_vals.map((k) => {
-    return <div className="key" onClick={(e) => handleKeyboard(e)} onKeyDown={(e) => handleKeyboard(e)}>
+    return <div className="key" onClick={(e) => handleKeyboard(e)}>
       {k}
     </div>
   })
