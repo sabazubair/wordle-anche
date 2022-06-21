@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import 'animate.css';
 
 export default function BoardRow({input}) {
   useEffect(() => {
@@ -8,8 +7,8 @@ export default function BoardRow({input}) {
   return (
     <div className="row">
       {input.map((sub) =>
-      <div style={{backgroundColor: sub.color, color: "#FFFFFF"}} className={`game-tile ` + (sub.letter != "" ? `animate__animated animate__pulse game-tile__submission` : "")}>
-        <p className="letter">{sub.letter}</p>
+      <div style={{backgroundColor: sub.color, borderColor: sub.fontColor ? sub.color : "none"}} className={`game-tile ` + (sub.letter != "" ? `game-tile__submission` : "")}>
+        <p className="letter" style={{color: sub.fontColor ? sub.fontColor : "#000000"}}>{sub.letter}</p>
       </div>)}
     </div>
   )
