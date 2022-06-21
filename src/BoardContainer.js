@@ -1,7 +1,7 @@
 import BoardRow from './BoardRow';
 import { useState, useEffect, useRef } from 'react';
 
-function BoardContainer({board, isActiveBoard, setGrid, input, inputRow, dividerRef}) {
+function BoardContainer({board, isActiveBoard, setGrid, input, inputRow, dividerRef, setIsGameOver}) {
   const boardContainer = useRef(null);
 
   const gridFall = (intervalId) => {
@@ -16,7 +16,7 @@ function BoardContainer({board, isActiveBoard, setGrid, input, inputRow, divider
     const dividerPos = dividerRef.current.getBoundingClientRect();
     if(gridBodyPos.bottom >= dividerPos.top) {
       clearInterval(intervalId);
-      console.log("STOP");
+      setIsGameOver(true);
     }
   }
 
