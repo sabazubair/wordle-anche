@@ -1,17 +1,21 @@
 import { useState, useEffect} from 'react';
 
-export default function Keyboard({inputRow, wordLength, input, setInput, inputValidator}) {
+export default function Keyboard({inputRow, wordLength, input, setInput, inputValidator, isGameOver}) {
   const keyboard_vals = ["Q", "W", "E", "R", "T", "Y","U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Enter", "Delete", "Z", "X", "C", "V", "B", "N", "M"];
+  const pattern = /[^A-Za-z0-9]/;
 
   function handleKeyboard(e) {
+    if(isGameOver) {
+      return;
+    }
     if(inputRow < 5) {
-      if(e.target.innerText === 'Delete' || e.key === 'Delete') {
-        // FIX: Do not print backspace
+      if(e.target.innerText === 'Delete' || e.key === 'Backspace') {
         if(input.length===0) {
           return
         }
         else {
           const text = input.slice(0, -1);
+          console.log(text);
           setInput(text);
         }
       }
@@ -21,7 +25,17 @@ export default function Keyboard({inputRow, wordLength, input, setInput, inputVa
           setInput([]);
         }
       }
+      //  else if(e.key.length > 1) {
+      //   return;
+      // }
+      // FIX
+      // else if (pattern.test(e.key) || e.key.length > 1) { // removes special keys
+      //   return;
+      // }
       else {
+        if(input.length === wordLength) {
+          return;
+        }
         if(e.key) {
           const letter = e.key.toUpperCase();
           setInput((oldInput) => {
