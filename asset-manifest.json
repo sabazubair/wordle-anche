@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/wordle-anche/static/css/main.38f1678d.css",
+    "main.js": "/wordle-anche/static/js/main.1b5aadcb.js",
+    "index.html": "/wordle-anche/index.html",
+    "main.38f1678d.css.map": "/wordle-anche/static/css/main.38f1678d.css.map",
+    "main.1b5aadcb.js.map": "/wordle-anche/static/js/main.1b5aadcb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.38f1678d.css",
+    "static/js/main.1b5aadcb.js"
+  ]
+}
