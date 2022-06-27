@@ -1,21 +1,23 @@
 import BoardRow from './BoardRow';
 import { useState, useEffect, useRef } from 'react';
+import toast, {Toaster} from 'react-hot-toast';
 
-function BoardContainer({board, isActiveBoard, setGrid, input, inputRow, dividerRef, setIsGameOver}) {
+function BoardContainer({board, isActiveBoard, setGrid, input, inputRow, dividerRef, isGameOver, setIsGameOver}) {
   const boardContainer = useRef(null);
+  const intervalRef = useRef();
 
-  const gridFall = (intervalId) => {
+  const gridFall = () => {
     const gridBodyPos = boardContainer.current.getBoundingClientRect();
     const currentPos = gridBodyPos.top;
     boardContainer.current.style.top = (currentPos - board.gridFall) + "px"; // moving grid down 5px
-    checkCollision(intervalId);
+    checkCollision();
   }
 
-  const checkCollision = (intervalId) => {
+  const checkCollision = () => {
     const gridBodyPos = boardContainer.current.getBoundingClientRect();
     const dividerPos = dividerRef.current.getBoundingClientRect();
     if(gridBodyPos.bottom >= dividerPos.top) {
-      clearInterval(intervalId);
+      clearInterval(intervalRef.current);
       setIsGameOver(true);
     }
   }
@@ -25,10 +27,14 @@ function BoardContainer({board, isActiveBoard, setGrid, input, inputRow, divider
   }
 
   useEffect(() => {
-    // console.log("board, line 28", board);
+    clearInterval(intervalRef.current);
+  }, [isGameOver])
+
+  useEffect(() => {
     const intervalId = setInterval(() => {
-      gridFall(intervalId);
-    }, 1000);
+      gridFall();
+    }, 3500);
+    intervalRef.current = intervalId;
     return () => clearInterval(intervalId);
   }, []);
 
