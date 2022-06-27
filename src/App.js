@@ -5,9 +5,9 @@ import BoardContainer from './BoardContainer';
 import Navbar from './Navbar';
 import { useState, useEffect, useRef} from 'react';
 import Keyboard from './Keyboard';
-import db3 from './db-3.js';
+import db4 from './db-4.js';
 import db5 from './db-5.js';
-import db8 from './db-8.js';
+import db6 from './db-6.js';
 
   const generateRandomIndex = (db) => {
     let randomIndex = Math.floor(Math.random() * db.length);
@@ -31,38 +31,37 @@ import db8 from './db-8.js';
 
 export default function App() {
   const [input, setInput] = useState([]);
-  const [history, setHistory] = useState([]);
   const [inputRow, setInputRow] = useState(0);
   const dividerRef = useRef(null);
   const [isGameOver, setIsGameOver] = useState(false);
   const [isActiveBoardId, setIsActiveBoardId] = useState(1);
   const [boards, setBoards] = useState([
-    {
-      id: 1,
-      rows: 5,
-      cols: 4,
-      grid: initialGrid(5, 4),
-      gridFall: 55,
-      answer: db3[generateRandomIndex(db3)]
-    },
-    {
-      id: 2,
-      rows: 5,
-      cols: 5,
-      gridFall: 55,
-      grid: initialGrid(5, 5),
-      answer: db5[generateRandomIndex(db5)]
-    },
-    {
-      id: 3,
-      rows: 5,
-      cols: 6,
-      gridFall: 55,
-      grid: initialGrid(5, 6),
-      answer:db8[generateRandomIndex(db8)]
-    }
-  ]);
-  const [activeBoard, setActiveBoard] = useState(boards[0]);
+      {
+        id: 1,
+        rows: 5,
+        cols: 4,
+        grid: initialGrid(5, 4),
+        gridFall: 55,
+        answer: db4[generateRandomIndex(db4)]
+      },
+      {
+        id: 2,
+        rows: 5,
+        cols: 5,
+        gridFall: 55,
+        grid: initialGrid(5, 5),
+        answer: db5[generateRandomIndex(db5)]
+      },
+      {
+        id: 3,
+        rows: 5,
+        cols: 6,
+        gridFall: 55,
+        grid: initialGrid(5, 6),
+        answer:db6[generateRandomIndex(db6)]
+      }
+    ]);
+  const [activeBoard, setActiveBoard] = useState(boards[0]); // save
   const didMount = useRef(false);
 
   const setGrid = (newGrid, boardId) => { // takes in grid, sets the active board grid
@@ -82,7 +81,6 @@ export default function App() {
 
   useEffect(() => {
     if (didMount.current) {
-      console.log('game over');
     } else {
       didMount.current = true;
     }
@@ -131,13 +129,15 @@ export default function App() {
     const isAnswer = subArr.every((el) => el.color === "#6AAA64");
     if(isAnswer) {
       if(isActiveBoardId === 3) {
-        toast("Winner!")
+        toast("Winner!");
+        setIsGameOver(true);
+      }
+      else {
+        toast("Nice work. Keep going.");
+        setIsActiveBoardId(isActiveBoardId + 1);
+        setInputRow(0);
         return;
       }
-      toast("Nice work. Keep going.");
-      setIsActiveBoardId(isActiveBoardId + 1);
-      setInputRow(0);
-      return;
     }
 
     setInputRow((oldInputRow) => {
@@ -153,7 +153,6 @@ export default function App() {
     setInput([]);
   }
 
-  // console.log(boards[0]);
   return (
     <div id="main">
       <Navbar/>
@@ -161,13 +160,13 @@ export default function App() {
         <Toaster/>
         <div className="columns">
           <div className="board-col">
-            <BoardContainer setIsGameOver={setIsGameOver} board={boards[0]} isActiveBoard={isActiveBoardId === 1} setGrid={setGrid} dividerRef={dividerRef} input={input} inputRow={inputRow}/>
+            <BoardContainer isGameOver={isGameOver} setIsGameOver={setIsGameOver} board={boards[0]} isActiveBoard={isActiveBoardId === 1} setGrid={setGrid} dividerRef={dividerRef} input={input} inputRow={inputRow}/>
           </div>
           <div className="board-col">
-            <BoardContainer setIsGameOver={setIsGameOver} board={boards[1]} isActiveBoard={isActiveBoardId === 2} setGrid={setGrid} dividerRef={dividerRef} input={input} inputRow={inputRow}/>
+            <BoardContainer isGameOver={isGameOver} setIsGameOver={setIsGameOver} board={boards[1]} isActiveBoard={isActiveBoardId === 2} setGrid={setGrid} dividerRef={dividerRef} input={input} inputRow={inputRow}/>
           </div>
           <div className="board-col">
-            <BoardContainer setIsGameOver={setIsGameOver} board={boards[2]} isActiveBoard={isActiveBoardId === 3} setGrid={setGrid} dividerRef={dividerRef} input={input} inputRow={inputRow}/>
+            <BoardContainer isGameOver={isGameOver} setIsGameOver={setIsGameOver} board={boards[2]} isActiveBoard={isActiveBoardId === 3} setGrid={setGrid} dividerRef={dividerRef} input={input} inputRow={inputRow}/>
           </div>
           <div className="keyboard-wrapper">
             <hr ref={dividerRef} id="divider"/>
