@@ -15,7 +15,6 @@ export default function Keyboard({inputRow, wordLength, input, setInput, inputVa
         }
         else {
           const text = input.slice(0, -1);
-          console.log(text);
           setInput(text);
         }
       }
@@ -25,15 +24,11 @@ export default function Keyboard({inputRow, wordLength, input, setInput, inputVa
           setInput([]);
         }
       }
-      //  else if(e.key.length > 1) {
-      //   return;
-      // }
-      // FIX
-      // else if (pattern.test(e.key) || e.key.length > 1) { // removes special keys
-      //   return;
-      // }
+       else if(e.type !== "click" && e.key.length > 1) {
+        return;
+      }
       else {
-        if(input.length === wordLength) {
+        if(input.length === wordLength) { // fix prevents users from typing greater than col length
           return;
         }
         if(e.key) {
