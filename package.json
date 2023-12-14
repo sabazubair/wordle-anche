@@ -1,7 +1,7 @@
 {
   "name": "wordle-app",
   "version": "0.1.0",
-  "homepage": "https://chintu1851.github.io/",
+  "homepage": "https://chintu1851.github.io/wordle-anche",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
