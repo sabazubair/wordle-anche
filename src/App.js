@@ -7,7 +7,7 @@ import { useState, useEffect, useRef} from 'react';
 import Keyboard from './Keyboard';
 import db4 from './db-4.js';
 import db5 from './db-5.js';
-import db6 from './db-6.js';
+// import db6 from './db-6.js';
 
   const generateRandomIndex = (db) => {
     let randomIndex = Math.floor(Math.random() * db.length);
