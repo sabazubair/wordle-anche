@@ -31,7 +31,7 @@ test('renders BoardRow without errors', () => {
   render(<BoardRow input={input} />);
 });
 
-test(' Keyboard running without problem', () => {
+test(' Keyboard running without any problem', () => {
   render(<Keyboard />);
 });
 
