@@ -4,7 +4,6 @@ import "@testing-library/jest-dom/extend-expect"; // Import this for better matc
 import App from "./App"; // Import your component
 import fs from 'fs';
 import path from 'path';
-import { screen } from '@testing-library/react';
 
 const htmlPath = path.join(__dirname, "../public/index.html");
 const htmlContent = fs.readFileSync(htmlPath, "utf-8");
