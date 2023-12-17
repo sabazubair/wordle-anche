@@ -3,26 +3,23 @@ name: CI/CD Pipeline
 on:
   pull_request:
     branches:
-      - master
-<<<<<<< HEAD
+      - main
 
-=======
->>>>>>> faab132df327aed982e2f2199e131c18d358a7ab
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 18
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 14
 
-    - name: Install Dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run Tests
-      run: npm run test
+      - name: Run tests
+        run: npm test
