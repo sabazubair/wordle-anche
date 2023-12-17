@@ -8,3 +8,5 @@ git add .
 git commit -m "firxt commit"
 git remote set -url origin https://github.com/neelp314918/wordle-anche.git
 git push origin master
+
+Thankyou!!
