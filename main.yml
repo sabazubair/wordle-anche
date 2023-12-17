@@ -19,8 +19,7 @@ jobs:
         node-version: 18
 
     - name: Install modules
-      run: yarn invalid-modules-command 
+      run: yarn
 
     - name: Run tests
-      run: yarn invalid-test-command
-
+      run: yarn test
