@@ -12,7 +12,6 @@ beforeEach(() => {
   document.body.innerHTML = htmlContent;
 });
 
-
 test("renders with a specific class name", () => {
   // Render the component
   const { container } = render(<App />);
