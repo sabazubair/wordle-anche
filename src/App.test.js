@@ -24,7 +24,7 @@ test("renders with a specific class name", () => {
 test('renders with the correct background color in body', () => {
   render(<App />);
   const bodyElement = document.body;
-  expect(bodyElement).toHaveStyle('background-color: rgb\\(250, 196, 209\\)');
+  expect(bodyElement).toHaveStyle('background-color: rgb(250, 196, 209)');
 });
 
 test('renders with a specific title', () => {
