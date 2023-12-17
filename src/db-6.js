@@ -2,3 +2,4 @@ const rawWords = "access,across,acting,action,active,actual,advice,advise,affect
 const words = [];
 rawWords.split(",").map((rw) => words.push(rw));
 export default words;
+
