@@ -8,12 +8,12 @@ Users need to have the following installed on their machines:
 - npm
 
 ### Installation
-    - clone the repository in terminal using this:
-    ```git clone https://github.com/sabazubair/wordle-anche```
-    - Change into the repository directory
-    ```cd wordle-anche```
-    - Install the packages using:
-    ```npm install```
+- clone the repository in terminal using this:
+```git clone https://github.com/sabazubair/wordle-anche```
+- Change into the repository directory
+```cd wordle-anche```
+- Install the packages using:
+```npm install```
 
 ### Local Development
 To run it in your localhost using:
