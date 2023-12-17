@@ -5,7 +5,7 @@ Welcome to Github repository for Wordle-Anche. If you enjoy wordle, you will def
 
 ### Prerequisites
 Users need to have the following installed on their machines:
-- npm
+- [npm](https://www.npmjs.com/)
 
 ### Installation
 - clone the repository in terminal using this:
