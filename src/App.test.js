@@ -43,8 +43,8 @@ test("renders with a specific id", () => {
   const { container } = render(<App />);
 
   // Check if the element with the specified id exists
-  const elementWithClassName = container.querySelector("#divider"); 
-  expect(elementWithClassName).toBeInTheDocument();
+  const elementWithId = container.querySelector("#divider"); 
+  expect(elementWithId).toBeInTheDocument();
 });
 
 //Test-5
