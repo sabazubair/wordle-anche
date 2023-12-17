@@ -1,9 +1,9 @@
 name: CI/CD Pipeline
 
 on:
-push:
+pull_request:
     branches:
-      - master
+      - main
       - fail-branch
 jobs:
   build:
