@@ -1,25 +1,26 @@
 name: CI/CD
 
-# on:
-#   pull_request:
-#     branches:
-#       - main
+on:
+  pull_request:
+    branches:
+      - main
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - name: Checkout repository
-#       uses: actions/checkout@v4
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-#     - name: Set up Node.js
-#       uses: actions/setup-node@v4
-#       with:
-#         node-version: 18
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
 
-#     - name: Install modules
-#       run: yarn
+    - name: Install modules
+      run: yarn
 
-#     - name: Run tests
-#       run: yarn test
+    - name: Run tests
+      run: yarn invalid-test-command
+
