@@ -3,6 +3,8 @@ import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect"; // Import this for better matchers
 import App from "./App"; // Import your component
 
+//Test-1
+
 test("renders with a specific class name", () => {
   // Render the component
   const { container } = render(<App />);
@@ -12,6 +14,7 @@ test("renders with a specific class name", () => {
   expect(elementWithClassName).toBeInTheDocument();
 });
 
+//Test-2
 
 test("renders with a specific class name", () => {
   // Render the component
@@ -22,6 +25,8 @@ test("renders with a specific class name", () => {
   expect(elementWithClassName).toBeInTheDocument();
 });
 
+//Test-3 
+
 test("renders with a specific class name", () => {
   // Render the component
   const { container } = render(<App />);
@@ -31,6 +36,8 @@ test("renders with a specific class name", () => {
   expect(elementWithClassName).toBeInTheDocument();
 });
 
+//Test-4
+
 test("renders with a specific id", () => {
   // Render the component
   const { container } = render(<App />);
@@ -39,6 +46,8 @@ test("renders with a specific id", () => {
   const elementWithClassName = container.querySelector("#divider"); 
   expect(elementWithClassName).toBeInTheDocument();
 });
+
+//Test-5
 
 test("renders with a specific class name", () => {
   // Render the component
