@@ -4,7 +4,10 @@ on:
   pull_request:
     branches:
       - master
+<<<<<<< HEAD
 
+=======
+>>>>>>> faab132df327aed982e2f2199e131c18d358a7ab
 jobs:
   build:
     runs-on: ubuntu-latest
