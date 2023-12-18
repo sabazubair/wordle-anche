@@ -48,4 +48,11 @@ test("renders with a specific class name 'keyboard-wrapper'", () => {
   expect(elementWithClassName).toBeInTheDocument();
 });
 
+// test("renders with a specific class name '.sura'", () => {
+//   // Render the component
+//   const { container } = render(<App />);
 
+//   // Check if the element with the specified class exists
+//   const elementWithClassName = container.querySelector(".sura");
+//   expect(elementWithClassName).toBeInTheDocument();
+// });
