@@ -59,7 +59,7 @@ test("renders with a specific class name", () => {
 //Test 5
 test("renders with a specific class name", () => {
   // Render the component
-  const { container } = render(<Form />);
+  const { container } = render(<App />);
 
   // Check if the element with the specified class exists
   const elementWithClassName = container.querySelector(".keyboard"); // Replace 'your-class-name' with the actual class name
