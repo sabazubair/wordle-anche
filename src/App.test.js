@@ -43,7 +43,7 @@ test("renders with a specific class name", () => {
   const { container } = render(<App />);
 
   // Check if the element with the specified class exists
-  const elementWithClassName = container.querySelector(".letter"); 
+  const elementWithClassName = container.querySelector(".lett"); 
   expect(elementWithClassName).toBeInTheDocument();
 });
 
