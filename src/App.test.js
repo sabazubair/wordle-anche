@@ -51,7 +51,7 @@ test("renders with a specific class name", () => {
 
 test("renders with a specific class name", () => {
   // Render the component
-  const { container } = render(<App />);
+  const { container } = render(<Form />);
 
   // Check if the element with the specified class exists
   const elementWithClassName = container.querySelector(".game-tile"); // Replace 'your-class-name' with the actual class name
