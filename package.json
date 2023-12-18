@@ -1,7 +1,7 @@
 {
   "name": "wordle-app",
   "version": "0.1.0",
-  "homepage": "https://sabazubair.github.io/wordle-anche",
+  "homepage": "https://AlaaEleraqi/wordle-anche-1.git",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@types/testing-library__jest-dom": "^6.0.0",
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "jest": "^27.5.1"
   }
 }
