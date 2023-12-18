@@ -11,7 +11,7 @@ test("renders with a specific class name", () => {
   const elementWithClassName = container.querySelector(".columns"); // Replace 'your-class-name' with the actual class name
   expect(elementWithClassName).toBeInTheDocument()
 
-
+});
 
 //Test 1
 test("renders with a specific class name", () => {

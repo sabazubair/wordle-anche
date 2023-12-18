@@ -80,7 +80,7 @@ export default function App() {
   }, [isActiveBoardId])
 
   useEffect(() => {
-    if (didMount.container) {
+    if (didMount.current) {
     } else {
       didMount.current = true;
     }
